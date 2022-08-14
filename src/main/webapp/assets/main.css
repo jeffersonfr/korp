@@ -1,0 +1,399 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, pre, a, em, img, strong, b, u, i, center, dl, dt, dd, ol, ul, li, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, nav, section {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+body {
+	line-height: 1em;
+}
+
+ol, ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+input, textarea {
+	appearance: none;
+	outline: none;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body, input, select, textarea {
+	color: #202020;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	font-weight: normal;
+	line-height: 1.75;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #202020;
+	font-weight: bold;
+	line-height: 1.5;
+	margin: 0 0 0.5em 0;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+	color: inherit;
+	text-decoration: none;
+}
+
+h1 {
+	font-size: 2.75em;
+}
+
+
+h2 {
+	font-size: 1.75em;
+}
+
+h3 {
+	font-size: 1.1em;
+}
+
+h4 {
+	font-size: 1em;
+}
+
+h5 {
+	font-size: 0.8em;
+}
+
+h6 {
+	font-size: 0.6em;
+}
+
+.align-left {
+	text-align: left;
+}
+
+.align-center {
+	text-align: center;
+}
+
+.align-right {
+	text-align: right;
+}
+
+.logo {
+	position: absolute;
+	top: 4em;
+}
+
+.logo-footer {
+	position: absolute;
+	bottom: 2em;
+}
+
+.logout-button {
+	width: 96px;
+	color: #f0f0f0;
+	font-weight: bold;
+	background-color: #404040;
+	border-radius: 4px;
+	border: none;
+	margin: 2em 0;
+	padding: 2px 4px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	text-align: center;
+	white-space: nowrap
+}
+
+.back-button {
+	position: absolute;
+  	right: 1em;
+	background-color: #00d0eb;
+}
+
+.login {
+	position: absolute;
+	top: 10em;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.login input[type="text"] {
+	display: block;
+	width: 196px;
+	margin: 8px;
+}
+
+#sidebar + #wrapper {
+	margin-left: 16em;
+}
+
+/* sidebar */
+#sidebar {
+	background: #ffffff;
+	padding: 2.5em 2.5em 0.5em 2.5em;
+	height: 100%;
+	left: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: fixed;
+	text-align: left;
+	top: 0;
+	width: 16em;
+	z-index: 10000;
+}
+
+#sidebar > .inner {
+	display: flex;
+	justify-content: right;
+}
+
+#sidebar nav div {
+	border: 0;
+	color: #202020;
+	font-size: 0.8em;
+	font-weight: bold;
+	padding: 2em 0 0 0;
+	text-decoration: none;
+}
+
+#sidebar nav a {
+	border: 0;
+	font-size: 0.8em;
+	padding: 0;
+	/*color: #202020;
+	text-decoration: none;*/
+}
+
+#toolbar .filter {
+	display: inline-block;
+	padding-right: 16px;
+}
+
+#toolbar .filter input {
+	width: 128px;
+	height: 2em;
+    vertical-align: bottom;
+	border: 1px solid #d0d0d0;
+	text-align: center;
+}
+
+#toolbar .filter img {
+    vertical-align: bottom;
+	background-color: #404040;
+	padding: 8px;
+	height: 2em;
+}
+
+#toolbar .filter input {
+	width: 172px;
+	outline: none;
+}
+
+#toolbar .filter.search input {
+	width: 204px;
+	outline: none;
+}
+
+#toolbar .filter.search img {
+	background-color: #00d0eb;
+}
+
+#toolbar .filter .select-item {
+	display: inline-block;
+	background-color: #fff;
+	width: 172px;
+}
+
+#toolbar .filter .select-item select {
+	background-color: transparent;
+	width: 100%;
+	appearance: none;
+	border: none;
+	text-align: center;
+}
+
+#wrapper {
+	background: #f6f6f6;
+	width: 100%;
+	height: 100%;
+	padding: 1em;
+	position: fixed;
+}
+
+.results {
+	max-width: 1120px;
+	font-size: 0.8em;
+}
+
+.results table {
+	background-color: #f0f0f0;
+	margin: 2em 0;
+	color: #202020;
+}
+
+.results table tbody tr:hover {
+	background-color: #e6f6e6;
+}
+
+.results table thead tr th {
+	text-align: center;	
+}
+
+.results table tbody tr td {
+	text-align: center;	
+}
+
+.results table thead {
+	background-color: #fff;
+	color: #202020;
+}
+
+/* responsividade */
+@media screen and (max-width: 1680px) {
+	body, input, select, textarea {
+		font-size: 14pt;
+	}
+
+	.wrapper > .inner {
+		padding: 2em 2em 2em 2em;
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	body, input, select, textarea {
+		font-size: 12pt;
+	}
+
+	.logo {
+		top: 4em;
+		left: 6em;
+	}
+
+	.login {
+		top: 0.5em;
+		right: 2em;
+	}
+
+	.logo-footer {
+		display: none;
+	}
+		
+	.wrapper > .inner {
+		width: 100%;
+	}
+
+	#wrapper {
+		top: 10em;
+	}
+
+	.results {
+		max-width: 100%;
+	}
+
+	#sidebar {
+		height: 10em;
+		left: 0;
+		overflow: hidden;
+		padding: 0;
+		text-align: center;
+		top: 0;
+		width: 100%;
+	}
+
+	#sidebar nav ul {
+		display: flex;
+		height: inherit;
+		line-height: inherit;
+		margin: 0;
+	}
+
+	#sidebar nav ul li {
+		display: block;
+		height: inherit;
+		line-height: inherit;
+		margin: 0;
+		padding: 0;
+	}		
+	
+	#sidebar + #wrapper {
+		margin-left: 0;
+		padding-top: 3.5em;
+	}
+}
+
+@media screen and (max-width: 720px) {
+	#toolbar .filter {
+		display: block;
+		padding: 8px;
+	}
+
+	h1 {
+		font-size: 2em;
+	}
+
+	h2 {
+		font-size: 1.25em;
+	}
+
+	h3 {
+		font-size: 1em;
+	}
+
+	h4 {
+		font-size: 0.8em;
+	}
+
+	h5 {
+		font-size: 0.6em;
+	}
+
+	h6 {
+		font-size: 0.6em;
+	}
+
+	.wrapper > .inner {
+		padding: 1em 1em 1em 1em ;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	body, input, select, textarea {
+		font-size: 10pt;
+	}
+	
+	.logo {
+		top: 4em;
+		right: -1em;
+		left: auto;
+	}
+
+	.login {
+		top: 7em;
+		right: 2em;
+	}
+	
+	#sidebar {
+		height: 18em;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	html, body {
+			min-width: 320px;
+		}
+	}
+}

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>Hyperspace by HTML5 UP</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+	    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet"> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" href="/KorpServlet/assets/main.css">
+				
+		<script>
+			var userName = "unknown";
+			
+			var jqxhr = 
+	    		  $.post("/KorpServlet/credentials")
+			    	  .done(function(e) {
+			    		  var json = JSON.parse(e);
+			    		  
+			    		  if (json.name != undefined && json.name != '') {
+			    		  	$("#name").html(json.name);
+			    		  }
+			    	  }); 
+		</script>
+</head>
+	<body >
+		<section id="sidebar">
+			<div class="inner">
+				<img class="logo center" src="/KorpServlet/assets/logo-anamnese_login.png"><img>
+				<div class="login">
+					<ul>
+						<li><div>Bem vindo(a), <a href="#intro" class="scrolly active"><span id="name"></span></a></div></li>
+					</ul>
+					<input class="logout-button center" type="button" value="sair" onclick="location.href='/KorpServlet/logout';"></button>
+				</div>
+				<img class="logo-footer center" src="/KorpServlet/assets/logo-medilab.png"><img>
+			</div>
+		</section>
+
+		<div id="wrapper">
+			<section id="intro" class="wrapper style1 fullscreen fade-up">
+				<div class="inner">
+					<h3>Título</h3>
+					<div id="toolbar">
+						<div class="filter">
+							<input type="text" id="filter-by-date" readonly></input><img id="filter-by-date-icon" src="/KorpServlet/assets/icon-calendar.png"></img>
+						</div>
+						<div class="filter">
+							<div class="select-item">
+								<select id="filter-by-modalidade" name="type">
+									<option value=""></option>
+								</select>
+							</div><img id="filter-by-modalidade-icon" src="/KorpServlet/assets/icon-baixo.png"></img>
+						</div>
+						<div class="filter">
+							<div class="select-item">
+								<select id="filter-by-geral" name="response">
+									<option value=""></option>
+								</select>
+							</div><img id="filter-by-geral-icon" src="/KorpServlet/assets/icon-baixo.png"></img>
+						</div>
+						<div class="filter search">
+							<input id="filter-by-text" type="text" value="jeff"></input><img src="/KorpServlet/assets/icon-pesquisa_hover.png"></img>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="intro" class="wrapper style1 fullscreen fade-up">
+				<div class="results">    
+					<div class="table-responsive">  
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>ID Paciente</th>
+									<th>Paciente</th>
+									<th>Numero</th>
+									<th>Tipo de Exame</th>
+									<th>Modalidade</th>
+									<th>Data</th>
+									<th>Visualizacao</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>1000</td>
+									<td>John</td>
+									<td>100101</td>
+									<td>Abdomen SUperior</td>
+									<td>RM</td>
+									<td>09/09/2022</td>
+									<td>Ler amnese</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+
+			<input class="back-button" type="button" value="Voltar"></input>
+		</div>
+
+      <script>
+        $(function() {
+			$("#filter-by-date").datepicker({
+				dayNamesMin: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sec", "Sab"]
+			});
+			$("#filter-by-date").datepicker("option", "monthNames", ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]);
+			$("#filter-by-date").datepicker("option", "dateFormat", "dd/mm/yy");
+
+            $("#filter-by-date").datepicker();
+            
+			$("#filter-by-date-icon").click(
+				function (e) {
+					$("#filter-by-date").val('');
+					$("#filter-by-date").change();
+
+					return true;
+				}
+			);
+
+			$("#filter-by-date").change(
+				function(e) {
+					filterData();
+
+					return true;
+				}
+			);
+
+			$("#filter-by-modalidade").change(
+				function(e) {
+					filterData();
+				}
+			);
+
+			$("#filter-by-geral").change(
+				function(e) {
+					filterData();
+				}
+			);
+
+			$("#filter-by-text").keyup(
+				function(e) {
+					filterData();
+
+					return true;
+				}
+			);
+
+			var mainData = null;
+
+			loadData();
+		});
+
+		function loadData() {
+			var data = String.raw`[
+{
+	"nome":"ANONIMO 1",
+	"numAcesso":"780153-158",
+	"visita":"",
+	"patientID":"ANONIMO",
+	"data":"2020-06-09",
+	"modalidade":"MR",
+	"tipoExame":"SHOULDER",
+	"numero":"780153-158",
+	"estado":"4",
+	"medSol":"",
+	"laudo":"F",
+	"sexo":"A",
+	"especial":"F",
+	"urgente":"F",
+	"restaurado":"F"
+},
+{
+	"nome":"ANONIMO 2",
+	"numAcesso":"60739-31",
+	"visita":"",
+	"patientID":"47002",
+	"data":"2020-05-25",
+	"modalidade":"MR",
+	"tipoExame":"RM COL CERVICAL  C1-C7",
+	"numero":"60739-31",
+	"estado":"1",
+	"dataNasc":"2014-03-24",
+	"medSol":"",
+	"laudo":"F",
+	"sexo":"F",
+	"especial":"F",
+	"urgente":"T",
+	"restaurado":"F"
+},
+{
+	"nome":"ANONIMO 3",
+	"numAcesso":"413953-19",
+	"visita":"",
+	"patientID":"389823",
+	"data":"2020-04-20",
+	"modalidade":"MR",
+	"tipoExame":"RM CRANIO",
+	"numero":"413953-19",
+	"estado":"1",
+	"dataNasc":"1945-06-21",
+	"medSol":"",
+	"laudo":"F",
+	"sexo":"F",
+	"especial":"T",
+	"urgente":"F",
+	"restaurado":"F"
+},
+{
+	"nome":"ANONIMO 4",
+	"numAcesso":"624732SAMER",
+	"visita":"",
+	"patientID":"ANONIMO",
+	"data":"2020-04-20",
+	"modalidade":"MR",
+	"tipoExame":"",
+	"numero":"624732SAMER",
+	"estado":"1",
+	"medSol":"",
+	"laudo":"F",
+	"sexo":"A",
+	"especial":"F",
+	"urgente":"F",
+	"restaurado":"F"
+},
+{
+	"nome":"ANONIMO 5",
+	"numAcesso":"771877-96",
+	"visita":"",
+	"patientID":"ANONIMO",
+	"data":"2020-04-20",
+	"modalidade":"CT",
+	"tipoExame":"ABDOMEN",
+	"numero":"771877-96",
+	"estado":"1",
+	"medSol":"",
+	"laudo":"F",
+	"sexo":"A",
+	"especial":"F",
+	"urgente":"F",
+	"restaurado":"F"
+},
+{
+	"nome":"ANONIMO 6",
+	"numAcesso":"771583-34",
+	"visita":"",
+	"patientID":"ANONIMO",
+	"data":"2020-04-17",
+	"modalidade":"MR",
+	"tipoExame":"",
+	"numero":"771583-34",
+	"estado":"3",
+	"medSol":"",
+	"laudo":"F",
+	"sexo":"A",
+	"especial":"F",
+	"urgente":"F",
+	"restaurado":"F"
+},
+{
+	"nome":"ANONIMO 7",
+	"numAcesso":"5429276",
+	"visita":"",
+	"patientID":"1702144",
+	"data":"2020-04-16",
+	"modalidade":"CR",
+	"tipoExame":"RX ANTEBRACO AP E PERFIL",
+	"numero":"5429276",
+	"estado":"3",
+	"dataNasc":"1997-07-12",
+	"medSol":"MEDICO",
+	"laudo":"F",
+	"sexo":"M",
+	"especial":"F",
+	"urgente":"T",
+	"restaurado":"F"
+},
+{
+	"nome":"ANONIMO 8",
+	"numAcesso":"771095-34",
+	"visita":"",
+	"patientID":"ANONIMO",
+	"data":"2020-04-14",
+	"modalidade":"MR",
+	"tipoExame":"",
+	"numero":"771095-34",
+	"estado":"1",
+	"medSol":"",
+	"laudo":"F",
+	"sexo":"A",
+	"especial":"F",
+	"urgente":"F",
+	"restaurado":"F"
+},
+{
+	"nome":"ANONIMO 9",
+	"numAcesso":"761706-34",
+	"visita":"",
+	"patientID":"257259",
+	"data":"2020-02-28",
+	"modalidade":"CT",
+	"tipoExame":"CRANIO SEQUENCIAL ADULT",
+	"numero":"761706-34",
+	"estado":"1",
+	"dataNasc":"1996-12-13",
+	"medSol":"",
+	"laudo":"F",
+	"sexo":"F",
+	"especial":"F",
+	"urgente":"F",
+	"restaurado":"F"
+},
+{
+	"nome":"ANONIMO 10",
+	"numAcesso":"417547",
+	"visita":"",
+	"patientID":"076867",
+	"data":"2022-08-31",
+	"modalidade":"CR",
+	"tipoExame":"MAMO",
+	"numero":"417547",
+	"estado":"B",
+	"dataNasc":"1953-02-26",
+	"medSol":"",
+	"loginLaudo":"AA",
+	"loginRevisao":"AA",
+	"finalizado":"F",
+	"laudo":"F",
+	"sexo":"F",
+	"especial":"F",
+	"urgente":"F",
+	"restaurado":"F",
+	"ditadoPor":"AA"
+}]`;
+			var json = JSON.parse(data);
+
+			var modalidade = [];
+			var geral = [];
+		
+			if (json != null && json != undefined) {
+				mainData = json;
+
+				$.each(mainData, function (index, item) {
+					if (item.modalidade != '' && modalidade.includes(item.modalidade) == false) {
+						modalidade.push(item.modalidade);
+					}
+
+					if (item.tipoExame != '' && geral.includes(item.tipoExame) == false) {
+						geral.push(item.tipoExame);
+					}
+				});
+			}
+
+			// filter by date
+			var date = $("#filter-by-date").datepicker("getDate");
+
+			// filter by modalidade
+			var modalidadeFilter = $("#filter-by-modalidade");
+			
+			$.each(modalidade, function(index, item) {
+				modalidadeFilter.append($('<option>', {
+					value: item,
+					text : item
+				}));
+			});
+
+			// filter by geral
+			var geralFilter = $("#filter-by-geral");
+			
+			$.each(geral, function(index, item) {
+				geralFilter.append($('<option>', {
+					value: item,
+					text : item
+				}));
+			});
+			
+			// filter by text
+			var text = $("#filter-by-text").val("");
+
+			// init data filter
+			filterData(); 
+		}
+
+		function filterData() {
+			var date = $("#filter-by-date").datepicker("getDate");
+			var modalidade = $("#filter-by-modalidade").val();
+			var geral = $("#filter-by-geral").val();
+			var text = $("#filter-by-text").val();
+
+			$('.results table.table tbody').html('');
+
+			if (mainData != null) {
+				$.each(mainData, function (index, item) {
+					var from = item.data.split("-");
+					var itemData = new Date(from[0], from[1] - 1, from[2]);
+
+					if (date != null && date.getTime() !== itemData.getTime()) {
+						return;
+					}
+
+					if (modalidade != '' && modalidade != item.modalidade) {
+						return;
+					}
+
+					if (geral != '' && geral != item.tipoExame) {
+						return;
+					}
+
+					text = text.toLowerCase();
+
+					var foundText = 
+						item.patientID.toLowerCase().indexOf(text) >= 0 ||
+						item.nome.toLowerCase().indexOf(text) >= 0 ||
+						item.numAcesso.toLowerCase().indexOf(text) >= 0 ||
+						item.tipoExame.toLowerCase().indexOf(text) >= 0 ||
+						item.modalidade.toLowerCase().indexOf(text) >= 0 ||
+						item.data.toLowerCase().indexOf(text) >=0 ||
+						item.laudo.toLowerCase().indexOf(text) >= 0;
+					
+					if (foundText == false) {
+						return;
+					}
+					
+					var columns = '';
+
+					columns += '<td>' + item.patientID + '</td>';
+					columns += '<td>' + item.nome + '</td>';
+					columns += '<td>' + item.numAcesso + '</td>';
+					columns += '<td>' + item.tipoExame + '</td>';
+					columns += '<td>' + item.modalidade + '</td>';
+					columns += '<td>' + item.data + '</td>';
+					columns += '<td>' + item.laudo + '</td>';
+
+					$('.results .table').append('<tr>' + columns + '</tr>');
+				});
+			}
+		}
+    </script>
+</html>
